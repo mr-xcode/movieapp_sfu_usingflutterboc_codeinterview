@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/search_bar/gf_search_bar.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/my_constant.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/pages/search_screen.dart';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({super.key});
@@ -9,37 +11,50 @@ class CustomSearchBar extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<CustomSearchBar> {
-  List list = [
-    "Flutter",
-    "React",
-    "Ionic",
-    "Xamarin",
-  ];
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).primaryColor,
-      child: GFSearchBar(
-        textColor: Colors.white,
-        searchList: list,
-        searchQueryBuilder: (query, list) {
-          return list
-              .where((item) => item.toLowerCase().contains(query.toLowerCase()))
-              .toList();
-        },
-        overlaySearchListItemBuilder: (item) {
-          return Container(
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              item,
-              style: const TextStyle(fontSize: 18),
-            ),
-          );
-        },
-        onItemSelected: (item) {
-          setState(() {
-            print('$item');
-          });
+      margin: EdgeInsets.all(0.0),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: MyConstant.pri_color,
+      ),
+      child: TextField(
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          enabledBorder:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          filled: true,
+          fillColor: MyConstant.searchbar_background,
+          hintText: 'Search a title',
+          hintStyle: TextStyle(color: MyConstant.searchbar_items_color),
+          prefixIcon:
+              Icon(Icons.search, color: MyConstant.searchbar_items_color),
+          suffixIcon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "|",
+                style: TextStyle(color: MyConstant.searchbar_items_color),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              IconButton(
+                icon: Icon(Icons.sort, color: Colors.white),
+                onPressed: () {
+                  // Perform sort action
+                  print('Sort button pressed');
+                },
+              ),
+            ],
+          ),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+        ),
+        onChanged: (value) {
+          // Handle search query changes
+          print('Search query: $value');
         },
       ),
     );

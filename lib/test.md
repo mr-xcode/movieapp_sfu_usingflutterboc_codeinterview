@@ -1,28 +1,45 @@
- emit(MovieDetailLoading());
-      Map<String, Movie> moviesList = {};
-      var url;
-      var response;
+import 'package:flutter/material.dart';
 
-      try {
-        url = Uri.parse(
-            'https://api.themoviedb.org/3/movie/now_playing?api_key=19d6149f34738ec93c495cd0527246ae&language=en-US&page=1');
-
-        var response = await http.get(url);
-
-        if (response.statusCode == 200) {
-          var jsonData = jsonDecode(response.body);
-          List<dynamic> results = jsonData['results'];
-
-          List<Movie> moviesList =
-              results.map((movieData) => Movie.fromJson(movieData)).toList();
-          print(moviesList.length);
-          emit(MovieDetailLoaded(moviesList[0]));
-          //yield MovieLoaded(movies);
-        } else {
-          print("Cannot load data");
-          //yield MovieError('Request failed with status: ${response.statusCode}');
-        }
-      } catch (e) {
-        emit(MovieDetailError());
-        print(e.toString());
-      }
+class ModernSearchBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: Colors.grey[200],
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Search',
+          prefixIcon: Icon(Icons.search, color: Colors.grey),
+          suffixIcon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: Icon(Icons.filter_list, color: Colors.grey),
+                onPressed: () {
+                  // Perform filter action
+                  print('Filter button pressed');
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.sort, color: Colors.grey),
+                onPressed: () {
+                  // Perform sort action
+                  print('Sort button pressed');
+                },
+              ),
+            ],
+          ),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+        ),
+        onChanged: (value) {
+          // Handle search query changes
+          print('Search query: $value');
+        },
+      ),
+    );
+  }
+}
