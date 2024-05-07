@@ -39,8 +39,8 @@ class GenresInitial extends MovieState {}
 class GenresLoading extends MovieState {}
 
 class GenresLoaded extends MovieState {
-  final List<Movie> movies;
-  const GenresLoaded(this.movies);
+  final List<Genre> genre;
+  const GenresLoaded(this.genre);
 }
 
 class GenresError extends MovieState {}
