@@ -6,8 +6,16 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).primaryColor,
       child: const Center(
-        child: Text("Search Screen"),
+        child: Text(
+          "Search Screen",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: Colors.cyan,
+            fontSize: 16,
+          ),
+        ),
       ),
     );
   }

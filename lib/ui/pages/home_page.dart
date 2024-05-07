@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/pages/download_screen.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/pages/home_screen.dart';
-import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/pages/movie_details_page.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/pages/profile_screen.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/pages/search_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';

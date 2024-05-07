@@ -12,13 +12,13 @@ class _MyWidgetState extends State<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(0.0),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(0.0),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: MyConstant.pri_color,
       ),
       child: TextField(
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           enabledBorder:
               OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
@@ -35,25 +35,19 @@ class _MyWidgetState extends State<CustomSearchBar> {
                 "|",
                 style: TextStyle(color: MyConstant.searchbar_items_color),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               IconButton(
-                icon: Icon(Icons.sort, color: Colors.white),
-                onPressed: () {
-                  // Perform sort action
-                  print('Sort button pressed');
-                },
+                icon: const Icon(Icons.sort, color: Colors.white),
+                onPressed: () {},
               ),
             ],
           ),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
         ),
-        onChanged: (value) {
-          // Handle search query changes
-          print('Search query: $value');
-        },
+        onChanged: (value) {},
       ),
     );
   }

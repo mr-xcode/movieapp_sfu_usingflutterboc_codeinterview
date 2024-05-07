@@ -162,8 +162,8 @@ Widget playDownloadShare() {
             Icons.play_arrow,
             color: Colors.white,
           ),
-          child: const Text("Play"),
           color: Colors.orange,
+          child: const Text("Play"),
         ),
         IconButton(
           onPressed: () {},

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -19,9 +18,8 @@ class MoviedetailsBloc extends Bloc<MoviedetailsEvent, MoviedetailsState> {
     });
 
     on<MyMoviesDeailsEvent>((event, emit) async {
-      Map<String, Movie> moviesList = {};
+      //Map<String, Movie> moviesList = {};
       var url;
-      var response;
 
       try {
         url = Uri.parse(

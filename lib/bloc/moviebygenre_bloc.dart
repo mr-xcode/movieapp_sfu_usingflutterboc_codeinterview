@@ -18,9 +18,8 @@ class MoviebygenreBloc extends Bloc<MoviebygenreEvent, MoviebygenreState> {
       // emitting loading
       emit(MoviesByGenreInitial());
 
-      Map<String, Movie> moviesList = {};
+      //Map<String, Movie> moviesList = {};
       var url;
-      var response;
 
       try {
         url = Uri.parse(
@@ -30,12 +29,10 @@ class MoviebygenreBloc extends Bloc<MoviebygenreEvent, MoviebygenreState> {
 
         if (response.statusCode == 200) {
           var jsonData = jsonDecode(response.body);
-          print(jsonData.toString());
           List<dynamic> results = jsonData['results'];
 
           List<Movie> moviesList =
               results.map((movieData) => Movie.fromJson(movieData)).toList();
-          print("Movie List Length" + moviesList.length.toString());
           emit(MoviesByGenreLoaded(moviesList));
         } else {
           emit(MoviesByGenreError());

@@ -11,8 +11,8 @@ Future<List<dynamic>> fetchGenres() async {
   if (response.statusCode == 200) {
     var jsonData = jsonDecode(response.body);
     List<dynamic> genres = jsonData['genres'];
-    List<Genre> genreList =
-        genres.map((movieData) => Genre.fromJson(movieData)).toList();
+    //List<Genre> genreList =
+    genres.map((movieData) => Genre.fromJson(movieData)).toList();
     return genres;
   } else {
     throw Exception('Request failed with status: ${response.statusCode}');

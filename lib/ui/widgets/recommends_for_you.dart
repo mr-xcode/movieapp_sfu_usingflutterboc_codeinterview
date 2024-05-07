@@ -57,10 +57,10 @@ class _RecommednsForYouState extends State<RecommednsForYou> {
           BlocBuilder<MovieBloc, MovieState>(
             builder: (context, state) {
               if (state is PopularInitial) {
-                return GFLoader();
+                return const GFLoader();
               }
               if (state is PopularLoading) {
-                return GFLoader();
+                return const GFLoader();
               }
               if (state is PopularLoaded) {
                 List<Movie> moviesList = state.movies;
@@ -75,8 +75,6 @@ class _RecommednsForYouState extends State<RecommednsForYou> {
                       var movie = moviesList[index];
                       return GestureDetector(
                         onTap: () {
-                          // Handle onTap for the manually created item
-                          // Trigger new Bloc event and navigate to a new page
                           final idData = IdData(id: movie.id);
                           Navigator.push(
                             context,
@@ -122,7 +120,6 @@ String getTitleStringLimit(String s) {
   } else {
     result = s.substring(0, 10) + '...';
   }
-  print(result);
   return result;
 }
 

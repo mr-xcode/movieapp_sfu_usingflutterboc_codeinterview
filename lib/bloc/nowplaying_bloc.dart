@@ -17,9 +17,8 @@ class NowplayingBloc extends Bloc<NowplayingEvent, NowplayingState> {
       // TODO: implement event handler// emitting loading
       emit(NowPlayingLoading());
 
-      Map<String, Movie> moviesList = {};
+      //Map<String, Movie> moviesList = {};
       var url;
-      var response;
 
       try {
         url = Uri.parse(
@@ -33,20 +32,11 @@ class NowplayingBloc extends Bloc<NowplayingEvent, NowplayingState> {
 
           List<Movie> moviesList =
               results.map((movieData) => Movie.fromJson(movieData)).toList();
-          print(moviesList.length);
           emit(NowPlayingLoaded(moviesList));
           //yield MovieLoaded(movies);
-        } else {
-          print("Cannot load data");
-          //yield MovieError('Request failed with status: ${response.statusCode}');
-        }
-      } catch (e) {
-        print(e.toString());
-        //yield MovieError('An error occurred: $e');
-        //emit(NowPlayingLoaded(movies));
+        } else {}
       } catch (e) {
         emit(NowPlayingError());
-        print(e.toString());
       }
     });
   }

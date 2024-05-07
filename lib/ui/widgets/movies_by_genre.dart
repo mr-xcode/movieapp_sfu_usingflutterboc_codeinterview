@@ -45,15 +45,12 @@ class _MoviesByGenereState extends State<MoviesByGenere> {
           ),
           BlocBuilder<GenreBloc, GenreState>(builder: (context, state) {
             if (state is GenreInitial) {
-              print("Genre init");
-              return GFLoader();
+              return const GFLoader();
             }
             if (state is GenresLoading) {
-              print("Genre loading");
-              return GFLoader();
+              return const GFLoader();
             }
             if (state is GenresLoaded) {
-              print("Genre loaded");
               return Container(
                 height: 39,
                 width: double.infinity,
@@ -86,7 +83,7 @@ class _MoviesByGenereState extends State<MoviesByGenere> {
               );
             }
             if (state is GenresError) {}
-            return Center(
+            return const Center(
               child: Text('Error Loding'),
             );
           }),
@@ -96,15 +93,12 @@ class _MoviesByGenereState extends State<MoviesByGenere> {
           BlocBuilder<MoviebygenreBloc, MoviebygenreState>(
             builder: (context, state) {
               if (state is MoviesByGenreInitial) {
-                print('movie by genre initial');
-                return GFLoader();
+                return const GFLoader();
               }
               if (state is MoviesByGenreLoading) {
-                print('movie by genre loading');
-                return GFLoader();
+                return const GFLoader();
               }
               if (state is MoviesByGenreLoaded) {
-                print('movie by genre loaded');
                 List<Movie> moviesList = state.movies;
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -143,25 +137,12 @@ class _MoviesByGenereState extends State<MoviesByGenere> {
                 );
               }
               if (state is MoviesByGenreError) {
-                print('movie by genre Error');
                 return const Center(
                   child: Text("Error Movie By Genre"),
                 );
               }
 
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                height: 231,
-                width: double.infinity,
-                child: ListView(
-                  // This next line does the trick.
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    //singleCardView('assets/images/spider_man.png',
-                    //  'The Jungle Wa..', 'Action'),
-                  ],
-                ),
-              );
+              return Container();
             },
           )
         ],
@@ -177,7 +158,6 @@ String getTitleStringLimit(String s) {
   } else {
     result = s.substring(0, 10) + '...';
   }
-  print(result);
   return result;
 }
 

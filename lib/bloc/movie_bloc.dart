@@ -2,10 +2,8 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/model/genre.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/model/movie.dart';
 import 'package:http/http.dart' as http;
-import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/my_helper.dart';
 
 part 'movie_event.dart';
 part 'movie_state.dart';
@@ -25,9 +23,8 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       // emitting loading
       emit(PopularLoading());
 
-      Map<String, Movie> moviesList = {};
+      //Map<String, Movie> moviesList = {};
       var url;
-      var response;
 
       try {
         url = Uri.parse(
@@ -45,8 +42,6 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
         } else {
           emit(PopularError());
         }
-      } catch (e) {
-        emit(PopularError());
       } catch (e) {
         emit(PopularError());
       }

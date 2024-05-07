@@ -27,7 +27,7 @@ class _BannerSectionState extends State<BannerSection> {
         }
         if (state is NowPlayingLoaded) {
           final List<String> imageList = getImageList(state.movies);
-          int count = 0;
+          //int count = 0;
 
           return Container(
             color: Theme.of(context).primaryColor,

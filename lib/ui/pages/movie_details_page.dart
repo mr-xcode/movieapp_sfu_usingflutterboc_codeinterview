@@ -18,10 +18,10 @@ class MovieDetailsPage extends StatelessWidget {
       body: BlocBuilder<MoviedetailsBloc, MoviedetailsState>(
           builder: (context, state) {
         if (state is MoviedetailsInitial) {
-          return GFLoader();
+          return const GFLoader();
         }
         if (state is MovieDetailLoading) {
-          return GFLoader();
+          return const GFLoader();
         }
         if (state is MovieDetailLoaded) {
           Movie m = state.movies;
@@ -43,19 +43,19 @@ class MovieDetailsPage extends StatelessWidget {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back,
                             color: Colors.white,
                           ),
                         ),
                         Text(
                           m.title.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                               fontSize: 16),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.favorite,
                           color: Colors.red,
                         ),
@@ -115,7 +115,7 @@ class MovieDetailsPage extends StatelessWidget {
           );
         }
         if (state is MovieDetailError) {
-          return Center(
+          return const Center(
             child: Text('Error'),
           );
         }

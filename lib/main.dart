@@ -18,7 +18,7 @@ void main() {
       statusBarColor: Color(0xff1F1D2B), // Set your desired color
     ),
   );
-  Bloc.observer = MovieObserver();
+  Bloc.observer = const MovieObserver();
   runApp(const MyApp());
 }
 
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               title: "Movie App",
-              home: HomePage(),
+              home: const HomePage(),
               theme: ThemeData(
                   primaryColor: MyConstant.pri_color,
                   highlightColor: MyConstant.highlight_color),
