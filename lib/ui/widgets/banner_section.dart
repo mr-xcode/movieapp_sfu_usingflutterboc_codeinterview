@@ -49,7 +49,7 @@ class _BannerSectionState extends State<BannerSection> {
                         borderRadius: BorderRadius.circular(16),
                         image: DecorationImage(
                           image: NetworkImage(url),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       ),
                       child: Stack(

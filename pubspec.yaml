@@ -23,7 +23,6 @@ dependencies:
   http: ^1.2.1
   persistent_bottom_nav_bar: ^5.0.2
   profile: ^0.0.1
-  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:

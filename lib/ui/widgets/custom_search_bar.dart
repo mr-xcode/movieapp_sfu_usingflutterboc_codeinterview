@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/components/search_bar/gf_search_bar.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/my_constant.dart';
-import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/pages/search_screen.dart';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({super.key});
