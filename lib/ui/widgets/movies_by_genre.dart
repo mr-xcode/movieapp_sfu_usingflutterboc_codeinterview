@@ -4,6 +4,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/bloc/genre_bloc.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/bloc/moviebygenre_bloc.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/bloc/moviedetails_bloc.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/id_data.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/model/movie.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/pages/movie_details_page.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/widgets/helper_widgets.dart';
@@ -118,10 +119,13 @@ class _MoviesByGenereState extends State<MoviesByGenere> {
                         onTap: () {
                           // Handle onTap for the manually created item
                           // Trigger new Bloc event and navigate to a new page
+                          final idData = IdData(id: movie.id);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MovieDetailsPage(),
+                              builder: (context) => MovieDetailsPage(
+                                movieId: idData,
+                              ),
                             ),
                           );
                           // Trigger new Bloc event

@@ -8,3 +8,9 @@ sealed class MoviedetailsEvent extends Equatable {
 }
 
 class MyMoviesDeailsEvent extends MoviedetailsEvent {}
+
+class UpdateDataEvent extends MoviedetailsEvent {
+  late final IdData idData;
+
+  UpdateDataEvent({required this.idData});
+}

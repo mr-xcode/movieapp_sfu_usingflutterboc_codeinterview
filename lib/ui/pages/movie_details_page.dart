@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/bloc/moviedetails_bloc.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/id_data.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/model/movie.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/widgets/helper_widgets.dart';
 
 class MovieDetailsPage extends StatelessWidget {
-  const MovieDetailsPage({super.key});
+  final IdData movieId;
+  const MovieDetailsPage({super.key, required this.movieId});
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<MoviedetailsBloc>(context)
+        .add(UpdateDataEvent(idData: movieId));
     return Scaffold(
       body: BlocBuilder<MoviedetailsBloc, MoviedetailsState>(
           builder: (context, state) {
@@ -20,6 +24,7 @@ class MovieDetailsPage extends StatelessWidget {
           return GFLoader();
         }
         if (state is MovieDetailLoaded) {
+          Movie m = state.movies;
           return SingleChildScrollView(
             child: Container(
               width: double.infinity,
@@ -44,7 +49,7 @@ class MovieDetailsPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Title Section",
+                          m.title.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
@@ -65,8 +70,8 @@ class MovieDetailsPage extends StatelessWidget {
                   Container(
                     width: 205,
                     height: 287,
-                    child: Image.asset(
-                      'assets/images/spider_man.png',
+                    child: Image.network(
+                      'https://image.tmdb.org/t/p/original' + m.posterPath,
                       fit: BoxFit.fill,
                     ),
                   ),
