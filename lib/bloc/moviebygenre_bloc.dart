@@ -2,28 +2,21 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/model/genre.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/model/movie.dart';
 import 'package:http/http.dart' as http;
-import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/my_helper.dart';
 
-part 'movie_event.dart';
-part 'movie_state.dart';
+part 'moviebygenre_event.dart';
+part 'moviebygenre_state.dart';
 
-class MovieBloc extends Bloc<MovieEvent, MovieState> {
-  // Constructor
-  MovieBloc() : super(MovieInitial()) {
-    // Default
-    on<MovieEvent>((event, emit) {
+class MoviebygenreBloc extends Bloc<MoviebygenreEvent, MoviebygenreState> {
+  MoviebygenreBloc() : super(MoviesByGenreInitial()) {
+    on<MoviebygenreEvent>((event, emit) {
       // TODO: implement event handler
     });
 
-    // Popular
-    on<PopularEvent>((event, emit) async {
-      // TODO: implement event handler
-
+    on<MyMoviebygenreEvent>((event, emit) async {
       // emitting loading
-      emit(PopularLoading());
+      emit(MoviesByGenreInitial());
 
       Map<String, Movie> moviesList = {};
       var url;
@@ -37,18 +30,18 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
         if (response.statusCode == 200) {
           var jsonData = jsonDecode(response.body);
+          print(jsonData.toString());
           List<dynamic> results = jsonData['results'];
 
           List<Movie> moviesList =
               results.map((movieData) => Movie.fromJson(movieData)).toList();
-          emit(PopularLoaded(moviesList));
+          print("Movie List Length" + moviesList.length.toString());
+          emit(MoviesByGenreLoaded(moviesList));
         } else {
-          emit(PopularError());
+          emit(MoviesByGenreError());
         }
       } catch (e) {
-        emit(PopularError());
-      } catch (e) {
-        emit(PopularError());
+        emit(MoviesByGenreError());
       }
     });
   }

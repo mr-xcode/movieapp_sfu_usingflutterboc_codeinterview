@@ -19,4 +19,8 @@ abstract class ApiService {
   @GET(
       '3/movie/now_playing?api_key=19d6149f34738ec93c495cd0527246ae&language=en-US&page=1')
   Future<List<Movie>> getNowPlaying();
+
+  @GET(
+      '3/movie/464052?api_key=19d6149f34738ec93c495cd0527246ae&language=en-US&page=1')
+  Future<Movie> getMovieDetaild();
 }
