@@ -1,16 +1,22 @@
-# movieapp_sfu_usingflutterboc_codeinterview
+# Movie App using Flutter BLoC (SFU)
 
-A new Flutter project.
+A simple API fetching app with flutter using BLoC pattern.
+Our API endpont is from TMDB.
+Getting text and image from server then show in app.
+There is an option to download and save files locally.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Authors
 
-A few resources to get you started if this is your first Flutter project:
+- [@mr-xcode](https://www.github.com/mr-xcode)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Deployment
+
+To deploy this project run
+
+```bash
+  flutter pub get
+  flutter run 
+```
+
