@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/bloc/genre_bloc.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/widgets/helper_widgets.dart';
 
 class MoviesByGenere extends StatefulWidget {
@@ -36,52 +38,54 @@ class _MoviesByGenereState extends State<MoviesByGenere> {
               ),
             ],
           ),
-          Container(
-            height: 39,
-            width: double.infinity,
-            child: ListView(
-              // This next line does the trick.
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                GFButton(
-                  onPressed: () {
-                    setState(() {
-                      isPressed = !isPressed;
-                    });
-                  },
-                  text: "All",
-                  shape: GFButtonShape.pills,
-                  color: Theme.of(context).primaryColor,
-                  highlightColor: Colors.red,
-                  textColor: isPressed ? Colors.cyan : Colors.white,
-                ),
-                GFButton(
-                  onPressed: () {},
-                  text: "Action",
-                  shape: GFButtonShape.pills,
-                  color: Theme.of(context).primaryColor,
-                ),
-                GFButton(
-                  onPressed: () {},
-                  text: "Adventure",
-                  shape: GFButtonShape.pills,
-                  color: Theme.of(context).primaryColor,
-                ),
-                GFButton(
-                  onPressed: () {},
-                  text: "Animation",
-                  shape: GFButtonShape.pills,
-                  color: Theme.of(context).primaryColor,
-                ),
-                GFButton(
-                  onPressed: () {},
-                  text: "Comedy",
-                  shape: GFButtonShape.pills,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ],
-            ),
-          ),
+          BlocBuilder<GenreBloc, GenreState>(builder: (context, state) {
+            if (state is GenreInitial) {
+              print("Genre init");
+              return GFLoader();
+            }
+            if (state is GenresLoading) {
+              print("Genre loading");
+              return GFLoader();
+            }
+            if (state is GenresLoaded) {
+              print("Genre loaded");
+              return Container(
+                height: 39,
+                width: double.infinity,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.genre.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        // Manually created item
+                        return GFButton(
+                          onPressed: () {},
+                          text: 'All',
+                          shape: GFButtonShape.pills,
+                          color: Theme.of(context).primaryColor,
+                          highlightColor: Colors.red,
+                          textColor: Colors.white,
+                        );
+                      } else {
+                        final genreInde = index - 1;
+                        return GFButton(
+                          onPressed: () {},
+                          text: state.genre[genreInde].name,
+                          shape: GFButtonShape.pills,
+                          color: Theme.of(context).primaryColor,
+                          highlightColor: Colors.red,
+                          textColor: isPressed ? Colors.cyan : Colors.white,
+                        );
+                      }
+                    }),
+              );
+            }
+            if (state is GenresError) {}
+            print("Genre GenreError");
+            return Center(
+              child: Text('Error Loding'),
+            );
+          }),
           const SizedBox(
             height: 5,
           ),

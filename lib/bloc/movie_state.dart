@@ -9,18 +9,6 @@ sealed class MovieState extends Equatable {
 
 final class MovieInitial extends MovieState {}
 
-// NowPlaying
-class NowPlayingInitial extends MovieState {}
-
-class NowPlayingLoading extends MovieState {}
-
-class NowPlayingLoaded extends MovieState {
-  final List<Movie> movies;
-  const NowPlayingLoaded(this.movies);
-}
-
-class NowPlayingError extends MovieState {}
-
 // Popular
 class PopularInitial extends MovieState {}
 
@@ -32,18 +20,6 @@ class PopularLoaded extends MovieState {
 }
 
 class PopularError extends MovieState {}
-
-// Genres
-class GenresInitial extends MovieState {}
-
-class GenresLoading extends MovieState {}
-
-class GenresLoaded extends MovieState {
-  final List<Genre> genre;
-  const GenresLoaded(this.genre);
-}
-
-class GenresError extends MovieState {}
 
 // MoviesByGenre
 class MoviesByGenreInitial extends MovieState {}

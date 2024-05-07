@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/components/carousel/gf_carousel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/bloc/nowplaying_bloc.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/model/movie.dart';
 
 class BannerSection extends StatefulWidget {
   const BannerSection({super.key});
@@ -9,76 +12,138 @@ class BannerSection extends StatefulWidget {
 }
 
 class _BannerSectionState extends State<BannerSection> {
-  final List<String> imageList = [
-    "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2017/12/13/00/23/christmas-3015776_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2019/12/19/10/55/christmas-market-4705877_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2019/12/22/04/18/x-mas-4711785__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
-  ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).primaryColor,
-      margin: const EdgeInsets.all(0),
-      child: GFCarousel(
-        autoPlay: true,
-        items: imageList.map(
-          (url) {
-            return Container(
-              width: 909,
-              height: 174,
-              margin: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    url,
-                  ),
-                  fit: BoxFit.cover, // or BoxFit.fill
-                ),
-              ),
-              child: const Stack(
-                children: [
-                  // Title
-                  Positioned(
-                    left: 10,
-                    top: 150,
-                    child: Text(
-                      'Black Panther: Wakanda Forever',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
+    return BlocBuilder<NowplayingBloc, NowplayingState>(
+      builder: (context, state) {
+        if (state is NowPlayingInitial) {
+          return GFLoader();
+        }
+        if (state is NowPlayingLoading) {
+          return GFLoader();
+        }
+        if (state is NowPlayingError) {
+          return GFLoader();
+        }
+        if (state is NowPlayingLoaded) {
+          final List<String> imageList = getImageList(state.movies);
+          int count = 0;
 
-                  // Date Time
-                  Positioned(
-                    left: 10,
-                    top: 180,
-                    child: Text(
-                      'On March 2, 2022 ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
+          return Container(
+            color: Theme.of(context).primaryColor,
+            margin: const EdgeInsets.all(0),
+            child: GFCarousel(
+              items: [
+                ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: imageList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    String url = imageList[index];
+                    Movie movie = state.movies[index];
+                    return Container(
+                      key: ValueKey(index), // Add a unique key for each item
+                      width: 909,
+                      height: 174,
+                      margin: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        image: DecorationImage(
+                          image: NetworkImage(url),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ).toList(),
-        onPageChanged: (index) {
-          setState(() {
-            index;
-          });
-        },
-      ),
+                      child: Stack(
+                        children: [
+                          // Title
+                          Positioned(
+                            left: 10,
+                            bottom: 30,
+                            child: Text(
+                              movie.title,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+
+                          Positioned(
+                            left: 10,
+                            bottom: 10,
+                            child: Text(
+                              getPrettyDate(movie.releaseDate),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                )
+              ],
+            ),
+          );
+        }
+        return Container();
+      },
     );
   }
+}
+
+List<String> getImageList(List<Movie> movieList) {
+  List<String> imageList = [];
+  movieList.forEach((element) {
+    imageList.add('https://image.tmdb.org/t/p/original' + element.posterPath);
+  });
+  return imageList;
+}
+
+String getPrettyDate(String s) {
+  String r = '';
+  List<String> result = s.split('-');
+  switch (result[1]) {
+    case '01':
+      r += 'On January';
+      break;
+    case '02':
+      r += 'On February';
+      break;
+    case '03':
+      r += 'On March';
+      break;
+    case '04':
+      r += 'On April';
+      break;
+    case '05':
+      r += 'On May';
+      break;
+    case '06':
+      r += 'On June';
+      break;
+    case '07':
+      r += 'On July';
+      break;
+    case '08':
+      r += 'On August';
+      break;
+    case '09':
+      r += 'On September';
+      break;
+    case '10':
+      r += 'On October';
+      break;
+    case '11':
+      r += 'On November';
+      break;
+    case '12':
+      r += 'On December';
+      break;
+  }
+  r += ' ${result[2]}, ${result[0]}';
+  return r;
 }

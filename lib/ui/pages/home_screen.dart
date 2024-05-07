@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/widgets/banner_section.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/widgets/custom_appbar.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/widgets/custom_search_bar.dart';
@@ -29,10 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
           const BannerSection(),
 
           // Recommands For You Section Get Popular
-          const RecommednsForYou(),
 
-          // Recommands For You Section Get Top Rated
-          //const RecommednsForYou(),
+          const RecommednsForYou(),
 
           // Movies by Genre Section
           const MoviesByGenere(),

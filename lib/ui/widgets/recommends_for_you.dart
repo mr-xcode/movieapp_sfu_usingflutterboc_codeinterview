@@ -16,12 +16,12 @@ class _RecommednsForYouState extends State<RecommednsForYou> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 267,
+      height: 280,
       color: Theme.of(context).primaryColor,
       child: Column(
         children: [
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -49,7 +49,7 @@ class _RecommednsForYouState extends State<RecommednsForYou> {
             ),
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           BlocBuilder<MovieBloc, MovieState>(
             builder: (context, state) {

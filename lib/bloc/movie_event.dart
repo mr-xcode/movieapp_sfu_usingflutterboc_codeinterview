@@ -7,11 +7,7 @@ sealed class MovieEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class NowPlayingEvent extends MovieEvent {}
-
 class PopularEvent extends MovieEvent {}
-
-class GenresEvent extends MovieEvent {}
 
 class MoviesByGenreEvent extends MovieEvent {}
 

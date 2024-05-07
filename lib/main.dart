@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/bloc/genre_bloc.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/bloc/movie_bloc.dart';
+import 'package:movieapp_sfu_usingflutterboc_codeinterview/bloc/nowplaying_bloc.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/data/my_constant.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/movie_observer.dart';
 import 'package:movieapp_sfu_usingflutterboc_codeinterview/ui/pages/home_page.dart';
@@ -21,10 +23,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => MovieBloc()
-        ..add(NowPlayingEvent())
-        ..add(PopularEvent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MovieBloc>(
+            create: (_) => MovieBloc()..add(PopularEvent())),
+        BlocProvider<NowplayingBloc>(
+          create: (_) => NowplayingBloc()..add(MyNowPlayingEvent()),
+        ),
+        BlocProvider<GenreBloc>(
+          create: (_) => GenreBloc()..add(MyGenresEvent()),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Movie App",
